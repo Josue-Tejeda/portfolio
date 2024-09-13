@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josue T - Backend Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+<body class="bg-gray-900 font-sans text-white">
+    <div x-data="{ 
+        menuOpen: false,
+        activeSection: 'home',
+        skills: [
+            { name: 'Python', level: 90 },
+            { name: 'Django', level: 85 },
+            { name: 'SQL', level: 80 },
+            { name: 'Redis', level: 60 },
+            { name: 'Docker', level: 75 },
+            { name: 'HTMX', level: 70 },
+            { name: 'Alpine', level: 70 }
+        ],
+        projects: [
+            { name: 'Blog Webapp', link: 'https://github.com/Josue-Tejeda/blog-app', description: 'Scalable website for a blogging platform', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Docker'] },
+            { name: 'Social Network website', link: 'https://github.com/Josue-Tejeda/InterestIntersection', description: 'WebApplication to connect and share content with friends', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Redis'] },
+            { name: 'Inventory Management Webapp', link: 'https://github.com/Josue-Tejeda/Proyecto-Manejo-de-inventario', description: 'Inventory management platform for mobile phone company', tech: ['Python', 'Flask', 'SQL Lite'] },
+            { name: 'BudgetTrak', link: 'https://github.com/Josue-Tejeda/finance-web-app/blob/main/tracker/templates/tracker/base.html', description: 'WebApplication to track finances (expenses and income)', tech: ['Python', 'Django', 'SQL Lite', 'Tailwind', 'HTMX'] }
+        ]
+    }">
+        <!-- Navigation -->
+        <nav class="bg-gray-800 shadow-lg w-full z-10">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between">
+                    <div class="flex space-x-7">
+                        <div>
+                            <a href="#" class="flex items-center py-4 px-2">
+                                <span class="font-semibold text-green-400 text-lg">Josue Tejeda</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-3">
+                        <a @click="activeSection = 'home'" href="#home" class="py-4 px-2 text-gray-300 font-semibold hover:text-green-400 transition duration-300" :class="{ 'text-green-400': activeSection === 'home' }">Home</a>
+                        <a @click="activeSection = 'about'" href="#about" class="py-4 px-2 text-gray-300 font-semibold hover:text-green-400 transition duration-300" :class="{ 'text-green-400': activeSection === 'about' }">About</a>
+                        <a @click="activeSection = 'skills'" href="#skills" class="py-4 px-2 text-gray-300 font-semibold hover:text-green-400 transition duration-300" :class="{ 'text-green-400': activeSection === 'skills' }">Skills</a>
+                        <a @click="activeSection = 'projects'" href="#projects" class="py-4 px-2 text-gray-300 font-semibold hover:text-green-400 transition duration-300" :class="{ 'text-green-400': activeSection === 'projects' }">Projects</a>
+                        <a @click="activeSection = 'contact'" href="#contact" class="py-4 px-2 text-gray-300 font-semibold hover:text-green-400 transition duration-300" :class="{ 'text-green-400': activeSection === 'contact' }">Contact</a>
+                    </div>
+                    <div class="md:hidden flex items-center">
+                        <button @click="menuOpen = !menuOpen" class="outline-none mobile-menu-button">
+                            <svg class="w-6 h-6 text-gray-300 hover:text-green-400"
+                                x-show="!menuOpen"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            <svg class="w-6 h-6 text-gray-300 hover:text-green-400"
+                                x-show="menuOpen"
+                                x-cloak
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div x-show="menuOpen" x-cloak class="mobile-menu md:hidden">
+                <ul class="bg-gray-800">
+                    <li><a @click="activeSection = 'home'; menuOpen = false" href="#home" class="block text-sm px-2 py-4 text-white hover:bg-green-400 transition duration-300">Home</a></li>
+                    <li><a @click="activeSection = 'about'; menuOpen = false" href="#about" class="block text-sm px-2 py-4 text-white hover:bg-green-400 transition duration-300">About</a></li>
+                    <li><a @click="activeSection = 'skills'; menuOpen = false" href="#skills" class="block text-sm px-2 py-4 text-white hover:bg-green-400 transition duration-300">Skills</a></li>
+                    <li><a @click="activeSection = 'projects'; menuOpen = false" href="#projects" class="block text-sm px-2 py-4 text-white hover:bg-green-400 transition duration-300">Projects</a></li>
+                    <li><a @click="activeSection = 'contact'; menuOpen = false" href="#contact" class="block text-sm px-2 py-4 text-white hover:bg-green-400 transition duration-300">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Content -->
+        <div class="container mx-auto px-4">
+            <!-- Home Section -->
+            <section id="home" x-show="activeSection === 'home'" class="py-20">
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold text-white mb-4">Josue Tejeda</h1>
+                    <h2 class="text-2xl text-gray-300 mb-8">Backend Developer</h2>
+                    <p class="text-xl text-gray-400 mb-12">Specialize in building robust and scalable server-side applications. I focus on designing APIs, managing databases, and implementing secure, high-performance solutions that power modern web applications. My expertise lies in Python, Django, SQL, Docker, and cloud platforms, ensuring efficient and reliable backends that meet business needs.</p>
+                    <img class="m-auto mb-8" src="https://private-user-images.githubusercontent.com/74038190/250967624-b3fef2db-e671-4610-bb84-1d65533dc5fb.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjYyNDYxNTIsIm5iZiI6MTcyNjI0NTg1MiwicGF0aCI6Ii83NDAzODE5MC8yNTA5Njc2MjQtYjNmZWYyZGItZTY3MS00NjEwLWJiODQtMWQ2NTUzM2RjNWZiLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA5MTMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwOTEzVDE2NDQxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWFjMTcwNmRlMGRlMjhkZjEyMzhlMTJiN2Q2MjE3MjBiNzdmNjI1ODIzNTYzZTkwODRjYTExMTQ1ZDY5NDVjYTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Bs0RMDdn2LsNMkTtZl2PwW79cnhA9OsobAz7tRD3lNQ" alt="">
+                    <a href="#contact" @click="activeSection = 'contact'" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">Get in Touch</a>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" x-show="activeSection === 'about'" class="py-20">
+                <h2 class="text-3xl font-bold text-white mb-8">About Me</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-300 mb-4">
+                            I'm a passionate self taught backend developer I love building scalable and efficient server-side applications. My expertise lies in designing robust APIs, optimizing database performance, and implementing secure authentication systems. 
+                        </p>
+                        <p class="text-gray-300 mb-4">
+                            I thrive in challenging environments and enjoy solving complex problems. My goal is to create backend solutions that not only meet but exceed client expectations in terms of performance, security, and maintainability. 
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Quick Facts</h3>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Advance Knowledge in Networking Protocols</li>
+                            <li>Expertise in Python and Django</li>
+                            <li>Strong knowledge of database systems</li>
+                            <li>Experience with cloud platforms (AWS, GCP, Azure)</li>
+                            <li>Advocate for clean code and best practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" x-show="activeSection === 'skills'" class="py-20">
+                <h2 class="text-3xl font-bold text-white mb-8">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <template x-for="skill in skills" :key="skill.name">
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-1">
+                                <span x-text="skill.name" class="text-base font-medium text-gray-300"></span>
+                                <span x-text="skill.level + '%'" class="text-sm font-medium text-gray-400"></span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-green-600 h-2.5 rounded-full" :style="'width: ' + skill.level + '%'"></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" x-show="activeSection === 'projects'" class="py-20">
+                <h2 class="text-3xl font-bold text-white mb-8">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <template x-for="project in projects" :key="project.name">
+                            <div class="bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                                <a :href="project.link" target="_blank" rel="noopener noreferrer">
+                                    <div class="p-6">
+                                        <h3 x-text="project.name" class="text-xl font-semibold text-white mb-2"></h3>
+                                        <p x-text="project.description" class="text-gray-300 mb-4"></p>
+                                        <div class="flex flex-wrap">
+                                            <template x-for="tech in project.tech" :key="tech">
+                                                <span x-text="tech" class="bg-green-700 hover:bg-green-900 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"></span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" x-show="activeSection === 'contact'" class="py-20 bg-gray-900">
+                <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-white mb-8">Get in Touch</h2>
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8">
+                    <p class="text-gray-300 mb-6 text-center">I'm always open to new opportunities and connections. Feel free to reach out through any of the following channels:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="mailto:josuetejeda02@gmail.com" class="flex items-center justify-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <svg class="w-8 h-8 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                        </svg>
+                        <span class="text-gray-300">Email</span>
+                    </a>
+                    <a href="https://github.com/Josue-Tejeda" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <svg class="w-8 h-8 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span class="text-gray-300">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/josue-tejeda-a79987169/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <svg class="w-8 h-8 text-gray-300 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        <span class="text-gray-300">LinkedIn</span>
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
