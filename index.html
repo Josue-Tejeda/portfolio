@@ -30,10 +30,10 @@
             { name: 'Alpine', level: 70 }
         ],
         projects: [
-            { name: 'Blog Webapp', link: 'https://github.com/Josue-Tejeda/blog-app', description: 'Scalable website for a blogging platform', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Docker'] },
-            { name: 'Social Network website', link: 'https://github.com/Josue-Tejeda/InterestIntersection', description: 'WebApplication to connect and share content with friends', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Redis'] },
-            { name: 'Inventory Management Webapp', link: 'https://github.com/Josue-Tejeda/Proyecto-Manejo-de-inventario', description: 'Inventory management platform for mobile phone company', tech: ['Python', 'Flask', 'SQL Lite'] },
-            { name: 'BudgetTrak', link: 'https://github.com/Josue-Tejeda/finance-web-app/blob/main/tracker/templates/tracker/base.html', description: 'WebApplication to track finances (expenses and income)', tech: ['Python', 'Django', 'SQL Lite', 'Tailwind', 'HTMX'] }
+            { name: 'Blog Webapp', link: 'https://github.com/Josue-Tejeda/blog-app', description: 'Scalable website for a blogging platform', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Docker'], image: 'p1.png' },
+            { name: 'Social Network website', link: 'https://github.com/Josue-Tejeda/InterestIntersection', description: 'WebApplication to connect and share content with friends', tech: ['Python', 'Django', 'Tailwind', 'PostgreSQL', 'Redis'], image: 'p2.png' },
+            { name: 'BudgetTrak', link: 'https://github.com/Josue-Tejeda/finance-web-app/blob/main/tracker/templates/tracker/base.html', description: 'WebApplication to track finances (expenses and income)', tech: ['Python', 'Django', 'SQL Lite', 'Tailwind', 'HTMX'], image: 'p3.png' },
+            { name: 'Inventory Management Webapp', link: 'https://github.com/Josue-Tejeda/Proyecto-Manejo-de-inventario', description: 'Inventory management platform for mobile phone company', tech: ['Python', 'Flask', 'SQL Lite'], image: 'p4.png' },
         ]
     }">
         <!-- Navigation -->
@@ -153,22 +153,24 @@
                 <h2 class="text-3xl font-bold text-white mb-8">Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <template x-for="project in projects" :key="project.name">
-                            <div class="bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md overflow-hidden">
-                                <a :href="project.link" target="_blank" rel="noopener noreferrer">
-                                    <div class="p-6">
-                                        <h3 x-text="project.name" class="text-xl font-semibold text-white mb-2"></h3>
-                                        <p x-text="project.description" class="text-gray-300 mb-4"></p>
-                                        <div class="flex flex-wrap">
-                                            <template x-for="tech in project.tech" :key="tech">
-                                                <span x-text="tech" class="bg-green-700 hover:bg-green-900 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"></span>
-                                            </template>
-                                        </div>
+                        <div class="bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                            <a :href="project.link" target="_blank" rel="noopener noreferrer">
+                                <img :src="project.image" alt="" class="w-full h-48 object-cover object-top">
+                                <div class="p-6">
+                                    <h3 x-text="project.name" class="text-xl font-semibold text-white mb-2"></h3>
+                                    <p x-text="project.description" class="text-gray-300 mb-4"></p>
+                                    <div class="flex flex-wrap">
+                                        <template x-for="tech in project.tech" :key="tech">
+                                            <span x-text="tech" class="bg-green-700 hover:bg-green-900 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"></span>
+                                        </template>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
+                        </div>
                     </template>
                 </div>
             </section>
+            
 
             <!-- Contact Section -->
             <section id="contact" x-show="activeSection === 'contact'" class="py-20 bg-gray-900">
